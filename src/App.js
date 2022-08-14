@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import SearchAppBar from "./Components/SearchAppBar";
+import HeroList from "./Components/HeroList";
+import { heroData } from "./Data";
+import AddHero from "./Components/AddHero";
 
 function App() {
+  const [heroes, setHeroes] = useState(heroData);
+  const [filterName, setFilterName] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header">
+        <SearchAppBar setFilterName={setFilterName} />
+      </div>
+      <div className="hero-add">
+        <AddHero heroes={heroes} setHeroes={setHeroes} />
+      </div>
+      <HeroList heroes={heroes} setHeroes={setHeroes} filterName={filterName} />
     </div>
   );
 }
