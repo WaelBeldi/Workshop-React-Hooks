@@ -2,12 +2,14 @@ import { useState } from "react";
 import "./App.css";
 import SearchAppBar from "./Components/SearchAppBar";
 import HeroList from "./Components/HeroList";
-import { heroData } from "./Data";
+// import { heroData } from "./Data";
 import AddHero from "./Components/AddHero";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [heroes, setHeroes] = useState(heroData);
+  // const [heroes, setHeroes] = useState(heroData);
   const [filterName, setFilterName] = useState("");
+  const heroes = useSelector(state => state.heroReducer.heroData)
 
   return (
     <div className="App">
@@ -15,9 +17,9 @@ function App() {
         <SearchAppBar setFilterName={setFilterName} />
       </div>
       <div className="hero-add">
-        <AddHero heroes={heroes} setHeroes={setHeroes} />
+        <AddHero heroes={heroes} />
       </div>
-      <HeroList heroes={heroes} setHeroes={setHeroes} filterName={filterName} />
+      <HeroList heroes={heroes} filterName={filterName} />
     </div>
   );
 }

@@ -1,12 +1,17 @@
 import React from "react";
 import {
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { delete_hero } from "../Redux/actions/heroActions";
 
 const HeroCard = ({hero}) => {
+  const dispatch = useDispatch();
   return (
     <Card sx={{ width: "15rem", height: "30rem" }}>
       <CardMedia
@@ -14,7 +19,7 @@ const HeroCard = ({hero}) => {
         height="140"
         image={hero.pictureURL}
         alt="Hero Picture"
-        sx={{ height: "25rem"}}
+        sx={{ height: "20rem"}}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -24,6 +29,9 @@ const HeroCard = ({hero}) => {
           {hero.universe}
         </Typography>
       </CardContent>
+      <CardActions>
+        <Button size="small" onClick={() => dispatch(delete_hero(hero.id))}>Delete</Button>
+      </CardActions>
     </Card>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { add_hero } from "../Redux/actions/heroActions";
 
 const style = {
   position: "absolute",
@@ -13,10 +15,12 @@ const style = {
   p: 4,
 };
 
-const AddHero = ({heroes, setHeroes}) => {
+const AddHero = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const dispatch = useDispatch()
 
   const [addName, setAddName] = useState("");
   const [addUniverse, setAddUniverse] = useState("");
@@ -24,15 +28,21 @@ const AddHero = ({heroes, setHeroes}) => {
 
   const AddHeroFunction = (e) => {
     e.preventDefault();
-    setHeroes([
-        ...heroes,
-        {
-            id: Math.random(),
-            name: addName,
-            universe: addUniverse.toLocaleUpperCase(),
-            pictureURL: addPictureURL
-        }
-    ])
+    // setHeroes([
+    //     ...heroes,
+    //     {
+    //         id: Math.random(),
+    //         name: addName,
+    //         universe: addUniverse.toLocaleUpperCase(),
+    //         pictureURL: addPictureURL
+    //     }
+    // ])
+    dispatch(add_hero({
+      id: Math.random(),
+      name: addName,
+      universe: addUniverse.toLocaleUpperCase(),
+      pictureURL: addPictureURL
+    }))
     handleClose();
   }
 
